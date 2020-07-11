@@ -4,7 +4,8 @@
   "description": "WP Gutenberg custom blocks",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "wp-scripts start",
+    "build": "wp-scripts build"
   },
   "author": "Andrey Kalko",
   "license": "ISC",
