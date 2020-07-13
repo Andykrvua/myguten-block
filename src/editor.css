@@ -1,3 +1,11 @@
 .wp-block-myguten-block-test-block {
   color: red;
 }
+.wp-block-myguten-block-test-block3 {
+  background: #ccc;
+  border: 0.2rem solid #000;
+  color: #000;
+  margin: 0 auto;
+  max-width: 740px;
+  padding: 2rem;
+}

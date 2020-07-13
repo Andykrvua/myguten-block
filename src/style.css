@@ -1,3 +1,46 @@
 .wp-block-myguten-block-test-block {
   color: blue;
 }
+
+.wp-block-myguten-block-test-block3 {
+  background: red;
+  border: 0.2rem solid #000;
+  color: #000;
+  margin: 0 auto;
+  max-width: 740px;
+  padding: 2rem;
+}
+#custom-headline {
+  display: flex;
+  align-items: center;
+}
+#custom-headline p {
+  margin: 0;
+}
+#custom-headline.font-18px p {
+  font-size: 18px !important;
+}
+#custom-headline.font-20px p {
+  font-size: 20px !important;
+}
+#custom-headline.font-22px p {
+  font-size: 22px !important;
+}
+#custom-headline.font-24px p {
+  font-size: 24px !important;
+}
+#custom-headline.font-26px p {
+  font-size: 26px !important;
+}
+#custom-headline.font-28px p {
+  font-size: 28px !important;
+}
+#custom-headline.font-30px p {
+  font-size: 30px !important;
+}
+#custom-headline.font-32px p {
+  font-size: 32px !important;
+}
+.custom-headline-text {
+  padding-left: 20px;
+}

@@ -23,6 +23,7 @@ registerBlockType("myguten-block/test-block2", {
       const locations = [...props.attributes.locations];
       locations.push({
         address: "",
+        names: "",
       });
       props.setAttributes({ locations });
     };
@@ -39,6 +40,12 @@ registerBlockType("myguten-block/test-block2", {
       props.setAttributes({ locations });
     };
 
+    const handleLocationNamesChange = (names, index) => {
+      const locations = [...props.attributes.locations];
+      locations[index].names = names;
+      props.setAttributes({ locations });
+    };
+
     let locationFields, locationDisplay;
 
     if (props.attributes.locations.length) {
@@ -51,6 +58,12 @@ registerBlockType("myguten-block/test-block2", {
               value={props.attributes.locations[index].address}
               onChange={(address) => handleLocationChange(address, index)}
             />
+            <TextControl
+              className="grf__location-address"
+              placeholder="Другой блок"
+              value={props.attributes.locations[index].names}
+              onChange={(names) => handleLocationNamesChange(names, index)}
+            />
             <IconButton
               className="grf__remove-location-address"
               icon="no-alt"
@@ -62,7 +75,12 @@ registerBlockType("myguten-block/test-block2", {
       });
 
       locationDisplay = props.attributes.locations.map((location, index) => {
-        return <p key={index}>{location.address}</p>;
+        return (
+          <p key={index}>
+            <span>{location.address}</span>
+            <span>{location.names}</span>
+          </p>
+        );
       });
     }
 
@@ -83,12 +101,17 @@ registerBlockType("myguten-block/test-block2", {
   },
   save: (props) => {
     const locationFields = props.attributes.locations.map((location, index) => {
-      return <p key={index}>{location.address}</p>;
+      return (
+        <p key={index}>
+          <span>{location.address}</span>
+          <span>{location.names}</span>
+        </p>
+      );
     });
 
     return (
       <div className={props.className}>
-        <h2>Block</h2>
+        <h2 className="dddd">Block</h2>
         {locationFields}
       </div>
     );

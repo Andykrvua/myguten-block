@@ -19,14 +19,11 @@ registerBlockType("myguten-block/test-block", {
       setAttributes({ content: newContent });
     };
     return (
-      <div>
-        <button>ok</button>
-        <RichText
-          tagName="p"
-          onChange={onChangeContent}
-          value={attributes.content}
-        />
-      </div>
+      <RichText
+        tagName="p"
+        onChange={onChangeContent}
+        value={attributes.content}
+      />
     );
   },
 
