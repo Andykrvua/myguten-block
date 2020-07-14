@@ -1,6 +1,6 @@
 <?php
 /**
-* Plugin Name: custom block for AMMM
+* Plugin Name: custom block for AMM
 * Description: Кастомные блоки для редактора Gutenberg
 * Version: 1.0
 * Author: Andrey Kalko
@@ -44,3 +44,16 @@ function my_custom_block_register_block() {
 }
 
 add_action( 'init', 'my_custom_block_register_block' );
+
+function add_custom_block_category( $categories, $post ) {
+	return array_merge(
+		$categories,
+		array(
+			array(
+				'slug' => 'AMM',
+				'title' => __( 'AMM blocks', 'AMM' ),
+			),
+		)
+	);
+}
+add_filter( 'block_categories', 'add_custom_block_category', 10, 2);

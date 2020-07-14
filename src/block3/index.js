@@ -138,8 +138,7 @@ registerBlockType("myguten-block/test-block3", {
   icon: {
     src: icons.icon,
   },
-  category: "common",
-  keywords: [__("testimonial"), __("create guten block Example"), __("cgb")],
+  category: "AMM",
   attributes: {
     headline: {
       type: "string",

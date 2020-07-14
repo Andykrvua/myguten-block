@@ -4,7 +4,7 @@ const { RichText } = wp.editor;
 registerBlockType("myguten-block/test-block", {
   title: "My block",
   icon: "smiley",
-  category: "common",
+  category: "AMM",
   attributes: {
     content: {
       type: "array",

@@ -9,3 +9,19 @@
   max-width: 740px;
   padding: 2rem;
 }
+
+.grf__location-address {
+  float: left;
+  width: calc(100% - 40px);
+}
+
+.grf__remove-location-address {
+  float: left;
+  margin-left: 10px;
+  margin-top: 1px;
+  padding: 5px 5px 4px;
+}
+
+.post-desc__svg {
+  width: 50px;
+}
