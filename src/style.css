@@ -1,51 +1,27 @@
-.wp-block-myguten-block-test-block {
-  color: blue;
-}
-
-.wp-block-myguten-block-test-block3 {
-  background: red;
-  border: 0.2rem solid #000;
-  color: #000;
-  margin: 0 auto;
-  max-width: 740px;
-  padding: 2rem;
-}
-#custom-headline {
-  display: flex;
-  align-items: center;
-}
-#custom-headline p {
+/*paragraph-block start*/
+.post-desc__p-text {
+  font-family: "Montserrat", sans-serif;
   margin: 0;
+  font-size: 14px;
+  color: #525252;
 }
-#custom-headline.font-18px p {
-  font-size: 18px !important;
+.post-desc__p-text.font-14px {
+  font-size: 14px;
 }
-#custom-headline.font-20px p {
-  font-size: 20px !important;
+.post-desc__p-text.font-16px {
+  font-size: 16px;
 }
-#custom-headline.font-22px p {
-  font-size: 22px !important;
+.post-desc__p-text.font-18px {
+  font-size: 18px;
 }
-#custom-headline.font-24px p {
-  font-size: 24px !important;
+.post-desc__p-text.font-22px {
+  font-size: 22px;
 }
-#custom-headline.font-26px p {
-  font-size: 26px !important;
+.post-desc__p-text.font-28px {
+  font-size: 28px;
 }
-#custom-headline.font-28px p {
-  font-size: 28px !important;
-}
-#custom-headline.font-30px p {
-  font-size: 30px !important;
-}
-#custom-headline.font-32px p {
-  font-size: 32px !important;
-}
-.custom-headline-text {
-  padding-left: 20px;
-}
+/*paragraph-block end*/
 
-/*icons block*/
 .message-body {
   display: inline-block;
 }
@@ -89,4 +65,3 @@
   display: flex;
   align-items: center;
 }
-/*icons block*/

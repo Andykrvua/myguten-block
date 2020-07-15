@@ -1,34 +1,39 @@
 const { registerBlockType } = wp.blocks;
 const { RichText } = wp.editor;
 
-registerBlockType("myguten-block/test-block", {
-  title: "My block",
-  icon: "smiley",
+registerBlockType("myguten-block/heading-block", {
+  title: "Заголовок H2",
+  icon: "shield",
   category: "AMM",
   attributes: {
     content: {
       type: "array",
       source: "children",
-      selector: "p",
+      selector: "H2",
     },
   },
   edit: (props) => {
-    console.log("edit-props", props);
     const { attributes, setAttributes } = props;
     const onChangeContent = (newContent) => {
       setAttributes({ content: newContent });
     };
     return (
       <RichText
-        tagName="p"
+        tagName="H2"
         onChange={onChangeContent}
         value={attributes.content}
+        placeholder={"Заголовок..."}
       />
     );
   },
 
   save: (props) => {
-    console.log("save-method-props ", props);
-    return <RichText.Content tagName="p" value={props.attributes.content} />;
+    return (
+      <RichText.Content
+        className="post-desc__subtitle"
+        tagName="H2"
+        value={props.attributes.content}
+      />
+    );
   },
 });

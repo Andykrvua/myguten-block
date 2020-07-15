@@ -16,7 +16,7 @@ const {
 const { InspectorControls } = wp.editor;
 const { Fragment } = wp.element;
 
-registerBlockType("myguten-block/test-block2", {
+registerBlockType("myguten-block/icons-block", {
   title: __("Блок иконок"),
   icon: "shield",
   category: "AMM",
@@ -56,50 +56,30 @@ registerBlockType("myguten-block/test-block2", {
     };
 
     let locationFields, locationDisplay;
+    let iconsSelectOptions = [];
+
+    Object.keys(iconset).forEach(function (key) {
+      iconsSelectOptions.push({ value: key, label: key });
+    });
 
     if (props.attributes.locations.length) {
       locationFields = props.attributes.locations.map((location, index) => {
         return (
           <Fragment key={index}>
             <TextareaControl
-              className="grf__location-address"
               placeholder="Описание блока"
               value={props.attributes.locations[index].address}
               onChange={(address) => handleLocationChange(address, index)}
             />
             <SelectControl
-              label="Select Icon"
+              className="icons-block__select"
+              label="Выберите иконку"
               value={props.attributes.locations[index].icons}
-              options={[
-                {
-                  label: "car",
-                  value: "car",
-                },
-                {
-                  label: "soundcloud",
-                  value: "soundcloud",
-                },
-                {
-                  label: "tools",
-                  value: "tools",
-                },
-                {
-                  label: "app_store",
-                  value: "app_store",
-                },
-                {
-                  label: "volume_off",
-                  value: "volume_off",
-                },
-                {
-                  label: "file_audio",
-                  value: "file_audio",
-                },
-              ]}
+              options={iconsSelectOptions}
               onChange={(icons) => handleLocationIconsChange(icons, index)}
             />
             <IconButton
-              className="grf__remove-location-address"
+              className="icons-block__remove-item"
               icon="no-alt"
               label="Delete icon block"
               onClick={() => handleRemoveLocation(index)}
@@ -110,29 +90,12 @@ registerBlockType("myguten-block/test-block2", {
 
       locationDisplay = props.attributes.locations.map((location, index) => {
         return (
-          <p key={index}>
-            <span>{location.address}</span>
-            <span>
-              {(() => {
-                switch (location.icons) {
-                  case "car":
-                    return iconset.car;
-                  case "soundcloud":
-                    return iconset.soundcloud;
-                  case "tools":
-                    return iconset.tools;
-                  case "app_store":
-                    return iconset.app_store;
-                  case "volume_off":
-                    return iconset.volume_off;
-                  case "file_audio":
-                    return iconset.file_audio;
-                  default:
-                    return null;
-                }
-              })()}
-            </span>
-          </p>
+          <div key={index} className="post-desc__advant-item">
+            {(() => {
+              return iconset[props.attributes.locations[index].icons];
+            })()}
+            <span className="post-desc__advant-span">{location.address}</span>
+          </div>
         );
       });
     }
@@ -157,22 +120,7 @@ registerBlockType("myguten-block/test-block2", {
       return (
         <div className="post-desc__advant-item" key={index}>
           {(() => {
-            switch (location.icons) {
-              case "car":
-                return iconset.car;
-              case "soundcloud":
-                return iconset.soundcloud;
-              case "tools":
-                return iconset.tools;
-              case "app_store":
-                return iconset.app_store;
-              case "volume_off":
-                return iconset.volume_off;
-              case "file_audio":
-                return iconset.file_audio;
-              default:
-                return null;
-            }
+            return iconset[props.attributes.locations[index].icons];
           })()}
           <span className="post-desc__advant-span">{location.address}</span>
         </div>

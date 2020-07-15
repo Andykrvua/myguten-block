@@ -1,27 +1,53 @@
-.wp-block-myguten-block-test-block {
-  color: red;
-}
-.wp-block-myguten-block-test-block3 {
-  background: #ccc;
-  border: 0.2rem solid #000;
-  color: #000;
-  margin: 0 auto;
-  max-width: 740px;
-  padding: 2rem;
-}
-
-.grf__location-address {
+/*icons-block start*/
+/*controls*/
+.icons-block__select {
   float: left;
   width: calc(100% - 40px);
 }
 
-.grf__remove-location-address {
+.icons-block__remove-item {
   float: left;
   margin-left: 10px;
-  margin-top: 1px;
+  margin-top: 22px;
   padding: 5px 5px 4px;
 }
-
-.post-desc__svg {
-  width: 50px;
+/*editor*/
+.wp-block-myguten-block-icons-block {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding-top: 50px;
 }
+.post-desc__advant-item {
+  min-width: 262px;
+  max-width: 350px;
+  width: 33%;
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+  line-height: 20px;
+  color: #525252;
+  display: flex;
+  align-items: center;
+  min-height: 120px;
+  margin-bottom: 15px;
+}
+.post-desc__svg {
+  height: 50px;
+  padding: 0 15px;
+  color: #872d2d;
+  min-width: 68px;
+  max-width: 68px;
+}
+.post-desc__advant-span {
+  padding-right: 15px;
+}
+/*icons-block end*/
+/*paragraph-block start*/
+/*editor*/
+.post-desc__p {
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+  font-size: 14px;
+  color: #525252;
+}
+/*paragraph-block end*/
