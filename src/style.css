@@ -1,3 +1,12 @@
+.myguten-block-block2 {
+  background: red;
+  border: 0.2rem solid black;
+  color: white;
+  margin: 0 auto;
+  max-width: 740px;
+  padding: 2rem;
+}
+
 /*paragraph-block start*/
 .post-desc__p-text {
   font-family: "Montserrat", sans-serif;
@@ -21,6 +30,14 @@
   font-size: 28px;
 }
 /*paragraph-block end*/
+/*list-block start*/
+.entry-content ul.items-list {
+  margin: 0;
+}
+.entry-content ul.items-list li {
+  font-family: "Montserrat", sans-serif;
+}
+/*list-block end*/
 
 .message-body {
   display: inline-block;

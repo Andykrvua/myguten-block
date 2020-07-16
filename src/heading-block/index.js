@@ -20,6 +20,7 @@ registerBlockType("myguten-block/heading-block", {
     return (
       <RichText
         tagName="H2"
+        className="post-desc__subtitle"
         onChange={onChangeContent}
         value={attributes.content}
         placeholder={"Заголовок..."}

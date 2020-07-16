@@ -1,7 +1,5 @@
 const { Component, Fragment } = wp.element;
 
-import icons from "./icons";
-
 const {
   RichText,
   InspectorControls,
@@ -21,10 +19,10 @@ class Inspector extends Component {
   }
   render() {
     const backgroundColors = [
-      { color: "#525252", name: "black" },
-      { color: "#872d2d", name: "red" },
-      { color: "#e49312", name: "yeloww" },
-      { color: "#bab3a6", name: "cream" },
+      { color: "#525252", name: "Черный" },
+      { color: "#872d2d", name: "Акцентный красный" },
+      { color: "#e49312", name: "Акцентный желтый" },
+      { color: "#bab3a6", name: "Акцентный кремовый" },
     ];
 
     const fontSizeOptions = [
@@ -102,17 +100,15 @@ class HeadlineBlock extends Component {
         }
         <RichText
           tagName="p"
-          placeholder={__("Add headline text...")}
+          placeholder={__("Текст...")}
           keepPlaceholderOnFocus
           value={headline}
           formattingControls={["bold", "italic", "strikethrough", "link"]}
-          className={"font-" + font_size + " post-desc__p"}
-          style={
-            ({
-              color: text_color,
-            },
-            { textAlign: alignment })
-          }
+          className={"font-" + font_size + " post-desc__p-text"}
+          style={{
+            color: text_color,
+            textAlign: alignment,
+          }}
           onChange={(value) => setAttributes({ headline: value })}
         />
       </div>,
@@ -134,7 +130,7 @@ registerBlockType("myguten-block/paragraph-block", {
     },
     text_color: {
       type: "string",
-      default: "black",
+      default: "#525252",
     },
     font_size: {
       type: "string",
@@ -156,11 +152,11 @@ registerBlockType("myguten-block/paragraph-block", {
           <RichText.Content
             tagName="p"
             className={"font-" + font_size + " post-desc__p-text"}
-            style={
-              ({ color: text_color },
-              { paddingTop: padding_top },
-              { textAlign: alignment })
-            }
+            style={{
+              color: text_color,
+              paddingTop: padding_top,
+              textAlign: alignment,
+            }}
             value={headline}
           />
         )}

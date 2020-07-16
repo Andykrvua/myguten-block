@@ -1,3 +1,12 @@
+.myguten-block-block2 {
+  background: green;
+  border: 0.2rem solid black;
+  color: black;
+  margin: 0 auto;
+  max-width: 740px;
+  padding: 2rem;
+}
+
 /*icons-block start*/
 /*controls*/
 .icons-block__select {
@@ -51,3 +60,12 @@
   color: #525252;
 }
 /*paragraph-block end*/
+/*list-block start*/
+.items-list li {
+  font-family: "Montserrat", sans-serif;
+  margin-left: 15px;
+  color: #525252;
+  font-size: 14px;
+  list-style-type: disc !important;
+}
+/*list-block end*/
