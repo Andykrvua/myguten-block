@@ -5,6 +5,7 @@ registerBlockType("myguten-block/heading-block", {
   title: "Заголовок H2",
   icon: "shield",
   category: "AMM",
+  parent: ["core/media-text"],
   attributes: {
     content: {
       type: "array",

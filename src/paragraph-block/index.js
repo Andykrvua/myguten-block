@@ -120,6 +120,7 @@ registerBlockType("myguten-block/paragraph-block", {
   title: __("Абзац"),
   icon: "shield",
   category: "AMM",
+  parent: ["core/media-text"],
   attributes: {
     headline: {
       type: "string",
