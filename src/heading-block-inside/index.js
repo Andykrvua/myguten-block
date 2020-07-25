@@ -1,10 +1,11 @@
 const { registerBlockType } = wp.blocks;
 const { RichText } = wp.editor;
 
-registerBlockType("myguten-block/heading-block", {
+registerBlockType("myguten-block/heading-block-inside", {
   title: "Заголовок H2",
   icon: "shield",
   category: "AMM",
+  parent: ["core/media-text"],
   attributes: {
     content: {
       type: "array",

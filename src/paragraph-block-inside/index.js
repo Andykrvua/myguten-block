@@ -116,10 +116,11 @@ class HeadlineBlock extends Component {
   }
 }
 
-registerBlockType("myguten-block/paragraph-block", {
+registerBlockType("myguten-block/paragraph-block-inside", {
   title: __("Абзац"),
   icon: "shield",
   category: "AMM",
+  parent: ["core/media-text"],
   attributes: {
     headline: {
       type: "string",
