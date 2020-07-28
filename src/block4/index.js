@@ -6,7 +6,7 @@ const { InspectorControls, RichText } = wp.editor;
 const { PanelBody, RadioControl } = wp.components;
 const { __ } = wp.i18n;
 
-registerBlockType("myguten-block/test-block4", {
+registerBlockType("amm-custom-block/test-block4", {
   title: __("Headline with Icon", "polandtravel"),
   description: __(
     "A headline block with custom icon to choose",

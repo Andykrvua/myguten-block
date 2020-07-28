@@ -21,9 +21,9 @@ const { Component, Fragment } = wp.element;
 
 //standard registerBlockType init
 
-registerBlockType("myguten-block/shortcode-selector", {
+registerBlockType("amm-custom-block/shortcode-selector", {
   title: "Шорткоды", //any title you like
-  icon: "universal-access-alt", //any dashicon or svg
+  icon: "shield", //any dashicon or svg
   category: "AMM", //which category to appear under
 
   //schema of attributes

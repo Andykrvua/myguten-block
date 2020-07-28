@@ -116,7 +116,7 @@ class HeadlineBlock extends Component {
   }
 }
 
-registerBlockType("myguten-block/paragraph-block", {
+registerBlockType("amm-custom-block/paragraph-block", {
   title: __("Абзац"),
   icon: "shield",
   category: "AMM",

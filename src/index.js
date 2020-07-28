@@ -12,7 +12,6 @@ import "./list-block-inside/index.js";
 import "./shortcode-selector/index.js";
 
 import "./accordion-block/index.js";
-import "./accordion-block2/index.js";
 
 import "./bg-image/index.js";
 

@@ -19,10 +19,10 @@ import {
 
 import { __ } from "@wordpress/i18n";
 
-const ALLOWED_BLOCKS = ["myguten-block/paragraph-block", "core/paragraph"];
+const ALLOWED_BLOCKS = ["amm-custom-block/paragraph-block", "core/paragraph"];
 
-registerBlockType("myguten-block/background-image", {
-  title: __("Background Image", "create-block"),
+registerBlockType("amm-custom-block/bg-image", {
+  title: __("Background Image"),
 
   description: __("", "create-block"),
 

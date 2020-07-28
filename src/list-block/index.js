@@ -69,7 +69,7 @@ class HeadlineBlock extends Component {
   }
 }
 
-registerBlockType("myguten-block/list-block", {
+registerBlockType("amm-custom-block/list-block", {
   title: "Список",
   icon: "shield",
   category: "AMM",

@@ -16,7 +16,7 @@ const {
 const { InspectorControls } = wp.editor;
 const { Fragment } = wp.element;
 
-registerBlockType("myguten-block/icons-block", {
+registerBlockType("amm-custom-block/icons-block", {
   title: __("Блок иконок"),
   icon: "shield",
   category: "AMM",

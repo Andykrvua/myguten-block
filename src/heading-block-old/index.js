@@ -1,7 +1,7 @@
 const { registerBlockType } = wp.blocks;
 const { RichText } = wp.editor;
 
-registerBlockType("myguten-block/heading-block-inside", {
+registerBlockType("amm-custom-block/heading-block-inside", {
   title: "Заголовок H2",
   icon: "shield",
   category: "AMM",

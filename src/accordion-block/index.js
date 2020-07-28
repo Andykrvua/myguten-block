@@ -1,41 +1,15 @@
-/**
- * WordPress Dependencies
- */
-const { __ } = wp.i18n; // Import __() from wp.i18n
-const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
+import attributes from "./attributes";
+import edit from "./edit";
+import save from "./save";
 
-/**
- * Internal Dependencies
- */
-import Editor from "./editor";
-import Render from "./render";
+const { __ } = wp.i18n;
+const { registerBlockType } = wp.blocks;
 
-/**
- * Register slider block.
- */
-registerBlockType("myguten-block/accordion-block", {
+registerBlockType("amm-custom-block/accordion-block", {
   title: __("Вопрос-ответ"),
   icon: "shield",
   category: "AMM",
-  attributes: {
-    anchor: {
-      type: "string",
-      default: "",
-    },
-    headerContent: {
-      type: "array",
-      source: "children",
-      selector:
-        ".wp-block-tomodomo-block-text-accordion .td-accordion__header p",
-    },
-    openByDefault: {
-      type: "boolean",
-      default: false,
-    },
-  },
-  supports: {
-    customClassName: false,
-  },
-  edit: Editor,
-  save: Render,
+  attributes,
+  edit,
+  save,
 });

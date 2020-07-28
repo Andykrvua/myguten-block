@@ -12,7 +12,7 @@ const { Component, Fragment } = wp.element;
 
 //standard registerBlockType init
 
-registerBlockType("myguten-block/test-block5", {
+registerBlockType("amm-custom-block/test-block5", {
   title: "Block w Shortcode Button", //any title you like
   icon: "universal-access-alt", //any dashicon or svg
   category: "AMM", //which category to appear under

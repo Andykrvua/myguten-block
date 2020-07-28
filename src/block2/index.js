@@ -4,12 +4,12 @@ const { MediaUpload } = wp.editor;
 const { Button } = wp.components;
 const { InnerBlocks } = wp.editor;
 
-const ALLOWED_BLOCKS = ["myguten-block/paragraph-block"];
+const ALLOWED_BLOCKS = ["amm-custom-block/paragraph-block"];
 
-registerBlockType("myguten-block/block2", {
+registerBlockType("amm-custom-block/block2", {
   title: __("Image Block"),
-  icon: "format-image",
-  category: "common",
+  icon: "shield",
+  category: "AMM",
   attributes: {
     mediaID: {
       type: "number",

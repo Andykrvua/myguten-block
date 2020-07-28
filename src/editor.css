@@ -69,11 +69,3 @@
   list-style-type: disc !important;
 }
 /*list-block end*/
-/*accordion start*/
-.td-accordion {
-  margin: 0;
-}
-.td-accordion .td-accordion__header {
-  cursor: unset;
-}
-/*accordion end*/
