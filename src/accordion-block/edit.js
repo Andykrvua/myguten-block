@@ -20,9 +20,9 @@ export default class Edit extends Component {
     return (
       <>
         <InspectorControls>
-          <PanelBody title={__("Display Settings")}>
+          <PanelBody title={__("Опции отображения")}>
             <ToggleControl
-              label={__("Open")}
+              label={isOpen ? __("Открыт") : __("Закрыт")}
               checked={isOpen}
               onChange={(isOpen) => setAttributes({ isOpen })}
             />
@@ -32,9 +32,9 @@ export default class Edit extends Component {
           <RichText
             tagName="div"
             className="accordion__title"
-            label={__("Title")}
+            label={__("Вопрос")}
             value={title}
-            placeholder={__("Title")}
+            placeholder={__("Вопрос")}
             keepPlaceholderOnFocus
             onChange={(title) => setAttributes({ title })}
           />

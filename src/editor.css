@@ -69,3 +69,13 @@
   list-style-type: disc !important;
 }
 /*list-block end*/
+/*accordion-block-start*/
+.accordion__title {
+  position: relative;
+  font-size: 22px;
+  line-height: 28px;
+  font-family: "Montserrat", sans-serif;
+  color: #525252;
+  font-weight: 600;
+}
+/*accordion-block-end*/

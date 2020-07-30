@@ -33,11 +33,59 @@
 details {
   border-bottom: 1px solid #f1f5f8;
   cursor: pointer;
+  width: 80%;
+  margin: 0 auto;
+}
+details[open] .accordion__title::after {
+  transform: rotate(270deg) translateY(-50%);
+  transform-origin: center top;
 }
 details:last-child {
   border-bottom: none;
 }
-summary {
-	padding: 10px;
+
+summary.accordion__title {
+  position: relative;
+  font-size: 22px;
+  line-height: 28px;
+  font-family: "Montserrat", sans-serif;
+  color: #525252;
+  font-weight: 600;
+  padding: 15px;
+  outline: none;
+}
+.accordion__body {
+  padding: 0 10px 10px;
+}
+summary.accordion__title::after {
+  content: url('data:image/svg+xml; utf8, <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path></svg>');
+  position: absolute;
+  opacity: 0.5;
+  width: 20px;
+  height: 20px;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%) rotate(90deg);
+  transition: all 0.3s;
+}
+details[open] summary ~ * {
+  animation: sweep 0.3s;
+}
+
+@keyframes sweep {
+  0% {
+    opacity: 0;
+    margin-top: -10px;
+  }
+  100% {
+    opacity: 1;
+    margin-top: 0px;
+  }
+}
+details > summary {
+  list-style: none;
+}
+details > summary::-webkit-details-marker {
+  display: none;
 }
 /*accordion-block-end*/
