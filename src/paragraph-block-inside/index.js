@@ -34,12 +34,22 @@ class Inspector extends Component {
     ];
 
     const paddingTopOptions = [
+      { value: "0px", label: __("0px") },
       { value: "10px", label: __("10px") },
+      { value: "25px", label: __("25px") },
       { value: "50px", label: __("50px") },
     ];
+
+    const paddingBottomOptions = [
+      { value: "0px", label: __("0px") },
+      { value: "10px", label: __("10px") },
+      { value: "25px", label: __("25px") },
+      { value: "50px", label: __("50px") },
+    ];
+
     const {
       setAttributes,
-      attributes: { text_color, font_size, padding_top },
+      attributes: { text_color, font_size, padding_top, padding_bottom },
     } = this.props;
     return (
       <InspectorControls key="inspector">
@@ -70,6 +80,14 @@ class Inspector extends Component {
               this.props.setAttributes({ padding_top: value })
             }
           />
+          <SelectControl
+            label={__("Отступ снизу")}
+            options={paddingBottomOptions}
+            value={padding_bottom}
+            onChange={(value) =>
+              this.props.setAttributes({ padding_bottom: value })
+            }
+          />
         </PanelBody>
       </InspectorControls>
     );
@@ -79,7 +97,14 @@ class Inspector extends Component {
 class HeadlineBlock extends Component {
   render() {
     const {
-      attributes: { headline, text_color, font_size, padding_top, alignment },
+      attributes: {
+        headline,
+        text_color,
+        font_size,
+        padding_top,
+        padding_bottom,
+        alignment,
+      },
       setAttributes,
     } = this.props;
 
@@ -141,11 +166,22 @@ registerBlockType("amm-custom-block/paragraph-block-inside", {
       type: "string",
       default: "50px",
     },
+    padding_bottom: {
+      type: "string",
+      default: "0px",
+    },
   },
   edit: HeadlineBlock,
   save: function (props) {
     const {
-      attributes: { headline, text_color, font_size, padding_top, alignment },
+      attributes: {
+        headline,
+        text_color,
+        font_size,
+        padding_top,
+        padding_bottom,
+        alignment,
+      },
     } = props;
     return (
       <Fragment>
@@ -156,6 +192,7 @@ registerBlockType("amm-custom-block/paragraph-block-inside", {
             style={{
               color: text_color,
               paddingTop: padding_top,
+              paddingBottom: padding_bottom,
               textAlign: alignment,
             }}
             value={headline}

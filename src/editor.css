@@ -79,3 +79,11 @@
   font-weight: 600;
 }
 /*accordion-block-end*/
+/*callback-form-block start*/
+.callback-form-editor {
+  min-height: 150px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+/*callback-form-block end*/

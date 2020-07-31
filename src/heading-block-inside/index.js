@@ -34,9 +34,19 @@ class Inspector extends Component {
     ];
 
     const paddingTopOptions = [
+      { value: "0px", label: __("0px") },
       { value: "10px", label: __("10px") },
+      { value: "25px", label: __("25px") },
       { value: "50px", label: __("50px") },
     ];
+
+    const paddingBottomOptions = [
+      { value: "0px", label: __("0px") },
+      { value: "10px", label: __("10px") },
+      { value: "25px", label: __("25px") },
+      { value: "50px", label: __("50px") },
+    ];
+
     const selectorOptions = [
       { value: "span", label: __("span") },
       { value: "p", label: __("p") },
@@ -49,7 +59,13 @@ class Inspector extends Component {
     ];
     const {
       setAttributes,
-      attributes: { text_color, font_size, padding_top, selector },
+      attributes: {
+        text_color,
+        font_size,
+        padding_top,
+        padding_bottom,
+        selector,
+      },
     } = this.props;
     return (
       <InspectorControls key="inspector">
@@ -81,6 +97,14 @@ class Inspector extends Component {
             }
           />
           <SelectControl
+            label={__("Отступ снизу")}
+            options={paddingBottomOptions}
+            value={padding_bottom}
+            onChange={(value) =>
+              this.props.setAttributes({ padding_bottom: value })
+            }
+          />
+          <SelectControl
             label={__("Селектор")}
             options={selectorOptions}
             value={selector}
@@ -100,6 +124,7 @@ class HeadlineBlock extends Component {
         text_color,
         font_size,
         padding_top,
+        padding_bottom,
         alignment,
         selector,
       },
@@ -164,6 +189,10 @@ registerBlockType("amm-custom-block/heading-block-inside", {
       type: "string",
       default: "50px",
     },
+    padding_bottom: {
+      type: "string",
+      default: "50px",
+    },
     selector: {
       type: "string",
       default: "H2",
@@ -178,6 +207,7 @@ registerBlockType("amm-custom-block/heading-block-inside", {
         text_color,
         font_size,
         padding_top,
+        padding_bottom,
         alignment,
         selector,
       },
@@ -191,6 +221,7 @@ registerBlockType("amm-custom-block/heading-block-inside", {
             style={{
               color: text_color,
               paddingTop: padding_top,
+              paddingBottom: padding_bottom,
               textAlign: alignment,
             }}
             value={headline}
