@@ -33,6 +33,7 @@ registerBlockType("amm-custom-block/youtube-block", {
         icons: "car",
         youtubeurl: "url",
         videoID: "videoID",
+        imgQual: "maxresdefault.jpg",
       });
       props.setAttributes({ locations });
     };
@@ -52,6 +53,12 @@ registerBlockType("amm-custom-block/youtube-block", {
     const handleLocationIconsChange = (icons, index) => {
       const locations = [...props.attributes.locations];
       locations[index].icons = icons;
+      props.setAttributes({ locations });
+    };
+
+    const handleimgQualOptionsChange = (icons, index) => {
+      const locations = [...props.attributes.locations];
+      locations[index].imgQual = imgQual;
       props.setAttributes({ locations });
     };
 
@@ -84,6 +91,12 @@ registerBlockType("amm-custom-block/youtube-block", {
 
     let locationFields, locationDisplay;
     let iconsSelectOptions = [];
+    const imgQualOptions = [
+      { value: "maxresdefault.jpg", label: __("maxresdefault") },
+      { value: "maxresdefault.jpg", label: __("maxresdefault") },
+      { value: "maxresdefault.jpg", label: __("maxresdefault") },
+      { value: "maxresdefault.jpg", label: __("maxresdefault") },
+    ];
 
     Object.keys(iconset).forEach(function (key) {
       iconsSelectOptions.push({ value: key, label: key });
@@ -101,6 +114,13 @@ registerBlockType("amm-custom-block/youtube-block", {
               )}
               value={props.attributes.locations[index].youtubeurl}
               onChange={(youtubeurl) => validateAndChangeURL(youtubeurl, index)}
+            />
+            <SelectControl
+              className="icons-block__select"
+              label="Качество изображения"
+              value={props.attributes.locations[index].imgQual}
+              options={imgQualOptions}
+              onChange={(imgQual) => handleimgQualOptionsChange(imgQual, index)}
             />
             <TextareaControl
               placeholder="Описание блока"
@@ -131,6 +151,12 @@ registerBlockType("amm-custom-block/youtube-block", {
               return iconset[props.attributes.locations[index].icons];
             })()}
             <span className="post-desc__advant-span">{location.address}</span>
+            <span className="post-desc__advant-span">
+              <img
+                src={`https://i.ytimg.com/vi/${location.videoID}/${location.imgQual}`}
+                alt=""
+              />
+            </span>
           </div>
         );
       });
@@ -159,6 +185,12 @@ registerBlockType("amm-custom-block/youtube-block", {
             return iconset[props.attributes.locations[index].icons];
           })()}
           <span className="post-desc__advant-span">{location.address}</span>
+          <span className="post-desc__advant-span">
+            <img
+              src={`https://i.ytimg.com/vi/${location.videoID}/${location.imgQual}`}
+              alt=""
+            />
+          </span>
         </div>
       );
     });
