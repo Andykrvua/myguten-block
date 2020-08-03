@@ -95,3 +95,54 @@ h2.post-desc__subtitle {
   margin: 0;
 }
 /*heading block end*/
+/*youtube-block start*/
+.lazy-video__wrapper {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 56.25%;
+  background-color: #000;
+}
+.lazy-video__media {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+.lazy-video__button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 68px;
+  height: 48px;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  transform: translate(-50%, -50%);
+  outline: none;
+  display: none;
+}
+.lazy-video__button-shape {
+  fill: #212121;
+  fill-opacity: 0.8;
+}
+.lazy-video__wrapper:hover .lazy-video__button-shape,
+.lazy-video__button:focus .lazy-video__button-shape {
+  fill: #ff0000;
+  fill-opacity: 1;
+}
+.lazy-video__button:focus {
+  background: none;
+}
+.lazy-video__button-icon {
+  fill: #fff;
+}
+.lazy-video--enabled {
+  cursor: pointer;
+}
+.lazy-video--enabled .lazy-video__button {
+  display: block;
+}
+/*youtube-block end*/

@@ -33,7 +33,7 @@ registerBlockType("amm-custom-block/youtube-block", {
         icons: "car",
         youtubeurl: "url",
         videoID: "videoID",
-        imgQual: "maxresdefault.jpg",
+        imgQual: "default",
       });
       props.setAttributes({ locations });
     };
@@ -56,7 +56,7 @@ registerBlockType("amm-custom-block/youtube-block", {
       props.setAttributes({ locations });
     };
 
-    const handleimgQualOptionsChange = (icons, index) => {
+    const handleimgQualOptionsChange = (imgQual, index) => {
       const locations = [...props.attributes.locations];
       locations[index].imgQual = imgQual;
       props.setAttributes({ locations });
@@ -69,20 +69,25 @@ registerBlockType("amm-custom-block/youtube-block", {
     const validateAndChangeURL = (youtubeurl, index) => {
       const locations = [...props.attributes.locations];
       locations[index].youtubeurl = youtubeurl;
+      // props.setAttributes({ locations });
 
-      if (!youtubeVideoURLTest.test(youtubeurl)) {
-        return;
-      }
+      // if (!youtubeVideoURLTest.test(youtubeurl)) {
+      //   return;
+      // }
 
       // Extract video ID and set embed url, TODO: Change to positive lookbehind when browsersupport gets better
       // would be: const videoID = /(?<=v=)[^&]+/.exec(youtubeURL);
       let videoID;
-      const parts = youtubeurl.split("v=");
-      if (parts[1].includes("&")) {
-        const moreParts = parts[1].split("&");
-        videoID = moreParts[0];
+      const parts = youtubeurl.split("v=") || youtubeurl;
+      if (parts[1]) {
+        if (parts[1].includes("&")) {
+          const moreParts = parts[1].split("&");
+          videoID = moreParts[0];
+        } else {
+          videoID = parts[1] || youtubeurl;
+        }
       } else {
-        videoID = parts[1];
+        videoID = youtubeurl;
       }
 
       locations[index].videoID = videoID;
@@ -92,10 +97,11 @@ registerBlockType("amm-custom-block/youtube-block", {
     let locationFields, locationDisplay;
     let iconsSelectOptions = [];
     const imgQualOptions = [
-      { value: "maxresdefault.jpg", label: __("maxresdefault") },
-      { value: "maxresdefault.jpg", label: __("maxresdefault") },
-      { value: "maxresdefault.jpg", label: __("maxresdefault") },
-      { value: "maxresdefault.jpg", label: __("maxresdefault") },
+      { value: "default", label: __("default 120*90") },
+      { value: "maxresdefault", label: __("max 1280*720") },
+      { value: "hqdefault", label: __("hq 480*360") },
+      { value: "mqdefault", label: __("mq 320*180") },
+      { value: "sddefault", label: __("sd 640*480") },
     ];
 
     Object.keys(iconset).forEach(function (key) {
@@ -146,18 +152,47 @@ registerBlockType("amm-custom-block/youtube-block", {
 
       locationDisplay = props.attributes.locations.map((location, index) => {
         return (
-          <div key={index} className="post-desc__advant-item">
+          <li key={index} className="lazy-video splide__slide">
+            <div className="lazy-video__wrapper">
+              {/* <div key={index} className="post-desc__advant-item">
             {(() => {
               return iconset[props.attributes.locations[index].icons];
             })()}
             <span className="post-desc__advant-span">{location.address}</span>
-            <span className="post-desc__advant-span">
-              <img
-                src={`https://i.ytimg.com/vi/${location.videoID}/${location.imgQual}`}
-                alt=""
-              />
-            </span>
-          </div>
+            <span className="post-desc__advant-span"> */}
+              <a className="lazy-video__link" href={location.youtubeurl}>
+                <picture>
+                  <source
+                    srcSet={`https://i.ytimg.com/vi_webp/${location.videoID}/${location.imgQual}.webp`}
+                    type="image/webp"
+                  />
+                  <img
+                    className="lazy-video__media"
+                    data-videoid={location.videoID}
+                    src={`https://i.ytimg.com/vi/${location.videoID}/${location.imgQual}.jpg`}
+                    alt=""
+                  />
+                </picture>
+              </a>
+              <button
+                className="lazy-video__button"
+                aria-label="Запустить видео"
+              >
+                <svg width="68" height="48" viewBox="0 0 68 48">
+                  <path
+                    className="lazy-video__button-shape"
+                    d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z"
+                  ></path>
+                  <path
+                    className="lazy-video__button-icon"
+                    d="M 45,24 27,14 27,34"
+                  ></path>
+                </svg>
+              </button>
+              {/* </span>
+          </div> */}
+            </div>
+          </li>
         );
       });
     }
@@ -172,32 +207,65 @@ registerBlockType("amm-custom-block/youtube-block", {
         </PanelBody>
       </InspectorControls>,
       <span>Блок иконок</span>,
-      <div key="2" className={props.className}>
-        {locationDisplay}
+      <div key="2" className={props.className + " splide"}>
+        <div className="splide__track">
+          <ul className="splide__list">{locationDisplay}</ul>
+        </div>
       </div>,
     ];
   },
   save: (props) => {
     const locationFields = props.attributes.locations.map((location, index) => {
       return (
-        <div className="post-desc__advant-item" key={index}>
+        <li key={index} className="lazy-video splide__slide">
+          <div className="lazy-video__wrapper">
+            {/* <div className="post-desc__advant-item" key={index}>
           {(() => {
             return iconset[props.attributes.locations[index].icons];
           })()}
           <span className="post-desc__advant-span">{location.address}</span>
-          <span className="post-desc__advant-span">
-            <img
-              src={`https://i.ytimg.com/vi/${location.videoID}/${location.imgQual}`}
-              alt=""
-            />
-          </span>
-        </div>
+          <span className="post-desc__advant-span"> */}
+            <a className="lazy-video__link" href={location.youtubeurl}>
+              <picture>
+                <source
+                  srcSet={`https://i.ytimg.com/vi_webp/${location.videoID}/${location.imgQual}.webp`}
+                  type="image/webp"
+                />
+                <img
+                  className="lazy-video__media"
+                  data-videoid={location.videoID}
+                  src={`https://i.ytimg.com/vi/${location.videoID}/${location.imgQual}.jpg`}
+                  alt=""
+                />
+              </picture>
+            </a>
+            <button className="lazy-video__button" aria-label="Запустить видео">
+              <svg width="68" height="48" viewBox="0 0 68 48">
+                <path
+                  className="lazy-video__button-shape"
+                  d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z"
+                ></path>
+                <path
+                  className="lazy-video__button-icon"
+                  d="M 45,24 27,14 27,34"
+                ></path>
+              </svg>
+            </button>
+            {/* </span>
+        </div> */}
+          </div>
+        </li>
       );
     });
 
     return (
-      <div className={props.className + " post-desc__advant-wrap"}>
-        {locationFields}
+      <div className={props.className + " splide"}>
+        <div className="splide__track">
+          <ul className="splide__list">
+            {/* <div className={props.className + " post-desc__advant-wrap"}> */}
+            {locationFields}
+          </ul>
+        </div>
       </div>
     );
   },
