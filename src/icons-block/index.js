@@ -31,6 +31,7 @@ registerBlockType("amm-custom-block/icons-block", {
     const handleAddLocation = () => {
       const locations = [...props.attributes.locations];
       locations.push({
+        title: "Заголовок",
         address: "Описание блока",
         icons: "car",
       });
@@ -46,6 +47,12 @@ registerBlockType("amm-custom-block/icons-block", {
     const handleLocationChange = (address, index) => {
       const locations = [...props.attributes.locations];
       locations[index].address = address;
+      props.setAttributes({ locations });
+    };
+
+    const handleTitleChange = (title, index) => {
+      const locations = [...props.attributes.locations];
+      locations[index].title = title;
       props.setAttributes({ locations });
     };
 
@@ -66,6 +73,11 @@ registerBlockType("amm-custom-block/icons-block", {
       locationFields = props.attributes.locations.map((location, index) => {
         return (
           <Fragment key={index}>
+            <TextControl
+              placeholder="Заголовок"
+              value={props.attributes.locations[index].title}
+              onChange={(title) => handleTitleChange(title, index)}
+            />
             <TextareaControl
               placeholder="Описание блока"
               value={props.attributes.locations[index].address}
@@ -81,7 +93,7 @@ registerBlockType("amm-custom-block/icons-block", {
             <IconButton
               className="icons-block__remove-item"
               icon="no-alt"
-              label="Delete icon block"
+              label="Удалить иконку"
               onClick={() => handleRemoveLocation(index)}
             />
           </Fragment>
@@ -94,6 +106,7 @@ registerBlockType("amm-custom-block/icons-block", {
             {(() => {
               return iconset[props.attributes.locations[index].icons];
             })()}
+            <span className="post-desc__advant-span">{location.title}</span>
             <span className="post-desc__advant-span">{location.address}</span>
           </div>
         );
@@ -105,7 +118,7 @@ registerBlockType("amm-custom-block/icons-block", {
         <PanelBody title={__("Иконки")}>
           {locationFields}
           <Button isDefault onClick={handleAddLocation.bind(this)}>
-            {__("Add Icon block")}
+            {__("Добавить иконку")}
           </Button>
         </PanelBody>
       </InspectorControls>,
@@ -122,6 +135,7 @@ registerBlockType("amm-custom-block/icons-block", {
           {(() => {
             return iconset[props.attributes.locations[index].icons];
           })()}
+          <span className="post-desc__advant-span">{location.title}</span>
           <span className="post-desc__advant-span">{location.address}</span>
         </div>
       );

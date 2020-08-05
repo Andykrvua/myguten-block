@@ -1,4 +1,4 @@
-import iconset from "./icons.js";
+import yticon from "./icons.js";
 
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
@@ -10,6 +10,7 @@ const {
   RadioControl,
   SelectControl,
   TextareaControl,
+  PanelRow,
 } = wp.components;
 const { InspectorControls } = wp.editor;
 const { Fragment } = wp.element;
@@ -29,10 +30,9 @@ registerBlockType("amm-custom-block/youtube-block", {
     const handleAddLocation = () => {
       const locations = [...props.attributes.locations];
       locations.push({
-        address: "Описание блока",
         youtubeurl: "url",
         videoID: "videoID",
-        imgQual: "default",
+        imgQual: "maxresdefault",
       });
       props.setAttributes({ locations });
     };
@@ -40,12 +40,6 @@ registerBlockType("amm-custom-block/youtube-block", {
     const handleRemoveLocation = (index) => {
       const locations = [...props.attributes.locations];
       locations.splice(index, 1);
-      props.setAttributes({ locations });
-    };
-
-    const handleLocationChange = (address, index) => {
-      const locations = [...props.attributes.locations];
-      locations[index].address = address;
       props.setAttributes({ locations });
     };
 
@@ -79,8 +73,7 @@ registerBlockType("amm-custom-block/youtube-block", {
       props.setAttributes({ locations });
     };
 
-    let locationFields, locationDisplay;
-    let iconsSelectOptions = [];
+    let locationFields, locationDisplay, locationDisplaySecond;
     const imgQualOptions = [
       { value: "default", label: __("default 120*90") },
       { value: "maxresdefault", label: __("max 1280*720") },
@@ -94,32 +87,27 @@ registerBlockType("amm-custom-block/youtube-block", {
         return (
           <Fragment key={index}>
             <TextControl
-              label={__("Youtube video link")}
+              label={__("Ссылка на Youtube видео")}
               help={__(
-                "Youtube video link or embed link. allowed format is [https://www.youtube.com/watch?v=video_id].",
-                "lazy-youtube"
+                "Формат ссылки [https://www.youtube.com/watch?v=video_id]"
               )}
               value={props.attributes.locations[index].youtubeurl}
               onChange={(youtubeurl) => validateAndChangeURL(youtubeurl, index)}
             />
             <SelectControl
-              className="icons-block__select"
               label="Качество изображения"
               value={props.attributes.locations[index].imgQual}
               options={imgQualOptions}
               onChange={(imgQual) => handleimgQualOptionsChange(imgQual, index)}
             />
-            <TextareaControl
-              placeholder="Описание блока"
-              value={props.attributes.locations[index].address}
-              onChange={(address) => handleLocationChange(address, index)}
-            />
-            <IconButton
-              className="icons-block__remove-item"
-              icon="no-alt"
-              label="Delete icon block"
+            <Button
+              isDefault
+              className="yt-block-del"
+              label="Удалить видео"
               onClick={() => handleRemoveLocation(index)}
-            />
+            >
+              {__("Удалить видео")}
+            </Button>
           </Fragment>
         );
       });
@@ -127,7 +115,7 @@ registerBlockType("amm-custom-block/youtube-block", {
       locationDisplay = props.attributes.locations.map((location, index) => {
         return (
           <li key={index} className="lazy-video splide__slide">
-            <div className="lazy-video__wrapper">
+            <div className="lazy-video__wrapper active">
               <a className="lazy-video__link" href={location.youtubeurl}>
                 <picture>
                   <source
@@ -146,27 +134,56 @@ registerBlockType("amm-custom-block/youtube-block", {
                 className="lazy-video__button"
                 aria-label="Запустить видео"
               >
-                {iconset.yt}
+                {yticon}
               </button>
             </div>
           </li>
         );
       });
+      locationDisplaySecond = props.attributes.locations.map(
+        (location, index) => {
+          return (
+            <li key={index} className="lazy-video splide__slide">
+              <div className="lazy-video__wrapper">
+                <picture>
+                  <source
+                    srcSet={`https://i.ytimg.com/vi_webp/${location.videoID}/mqdefault.webp`}
+                    type="image/webp"
+                  />
+                  <img
+                    className="lazy-video__media"
+                    data-videoid={location.videoID}
+                    src={`https://i.ytimg.com/vi/${location.videoID}/mqdefault.jpg`}
+                    alt=""
+                  />
+                </picture>
+              </div>
+            </li>
+          );
+        }
+      );
     }
 
     return [
       <InspectorControls key="1">
-        <PanelBody title={__("Иконки")}>
+        <PanelBody title={__("Youtube")}>
           {locationFields}
-          <Button isDefault onClick={handleAddLocation.bind(this)}>
-            {__("Add Icon block")}
-          </Button>
+          <PanelRow>
+            <Button isDefault isPrimary onClick={handleAddLocation.bind(this)}>
+              {__("Добавить видео")}
+            </Button>
+          </PanelRow>
         </PanelBody>
       </InspectorControls>,
-      <span>Блок иконок</span>,
+      <span>Слайдер Youtube видео</span>,
       <div key="2" className={props.className + " splide"}>
         <div className="splide__track">
           <ul className="splide__list">{locationDisplay}</ul>
+        </div>
+      </div>,
+      <div key="3" className={props.className + " splide" + " copy--slider"}>
+        <div className="splide__track">
+          <ul className="splide__list">{locationDisplaySecond}</ul>
         </div>
       </div>,
     ];
@@ -175,7 +192,7 @@ registerBlockType("amm-custom-block/youtube-block", {
     const locationFields = props.attributes.locations.map((location, index) => {
       return (
         <li key={index} className="lazy-video splide__slide">
-          <div className="lazy-video__wrapper">
+          <div className="lazy-video__wrapper active">
             <a className="lazy-video__link" href={location.youtubeurl}>
               <picture>
                 <source
@@ -191,19 +208,54 @@ registerBlockType("amm-custom-block/youtube-block", {
               </picture>
             </a>
             <button className="lazy-video__button" aria-label="Запустить видео">
-              {iconset.yt}
+              {yticon}
             </button>
           </div>
         </li>
       );
     });
+    const locationFieldsSecond = props.attributes.locations.map(
+      (location, index) => {
+        return (
+          <li key={index} className="lazy-video splide__slide">
+            <div className="lazy-video__wrapper">
+              <picture>
+                <source
+                  srcSet={`https://i.ytimg.com/vi_webp/${location.videoID}/mqdefault.webp`}
+                  type="image/webp"
+                />
+                <img
+                  className="lazy-video__media"
+                  data-videoid={location.videoID}
+                  src={`https://i.ytimg.com/vi/${location.videoID}/mqdefault.jpg`}
+                  alt=""
+                />
+              </picture>
+              <button
+                className="lazy-video__button"
+                aria-label="Запустить видео"
+              >
+                {yticon}
+              </button>
+            </div>
+          </li>
+        );
+      }
+    );
 
     return (
-      <div className={props.className + " splide"}>
-        <div className="splide__track">
-          <ul className="splide__list">{locationFields}</ul>
+      <>
+        <div className={props.className + " splide" + " primary--slider"}>
+          <div className="splide__track">
+            <ul className="splide__list">{locationFields}</ul>
+          </div>
         </div>
-      </div>
+        <div className={props.className + " splide" + " secondary--slider"}>
+          <div className="splide__track">
+            <ul className="splide__list">{locationFieldsSecond}</ul>
+          </div>
+        </div>
+      </>
     );
   },
 });

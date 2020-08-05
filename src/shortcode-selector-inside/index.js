@@ -1,33 +1,18 @@
+import backgroundColors from "./../shortcode-list/index.js";
+
 var el = wp.element.createElement;
-const { __ } = wp.i18n; // Import __() from wp.i18n
-const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
-const {
-  RichText,
-  BlockControls,
-  BlockFormatControls,
-  AlignmentToolbar,
-  InspectorControls,
-} = wp.editor;
-const {
-  Button,
-  Dashicon,
-  Tooltip,
-  IconButton,
-  Toolbar,
-  PanelBody,
-  SelectControl,
-} = wp.components;
+const { __ } = wp.i18n;
+const { registerBlockType } = wp.blocks;
+const { RichText, BlockControls, InspectorControls } = wp.editor;
+const { PanelBody, SelectControl } = wp.components;
 const { Component, Fragment } = wp.element;
 
-//standard registerBlockType init
-
 registerBlockType("amm-custom-block/shortcode-selector-inside", {
-  title: "Шорткоды", //any title you like
-  icon: "shield", //any dashicon or svg
-  category: "AMM", //which category to appear under
+  title: "Шорткоды",
+  icon: "shield",
+  category: "AMM",
   parent: ["core/cover"],
 
-  //schema of attributes
   attributes: {
     content: {
       type: "array",
@@ -39,28 +24,21 @@ registerBlockType("amm-custom-block/shortcode-selector-inside", {
     },
   },
 
-  //for adding things like a rich text editor, and controls - the editor
   edit: class extends Component {
-    //standard constructor for a component
     constructor() {
       super(...arguments);
 
-      //make sure we bind `this` to the current component within our callbacks
       this.setupEditor = this.setupEditor.bind(this);
       this.onChangeContent = this.onChangeContent.bind(this);
       this.shortcodeSelected = this.shortcodeSelected.bind(this);
 
-      this.state = {
-        //we don't need our component to manage a state in this instance
-      };
+      this.state = {};
     }
 
-    //get a local reference to the editor on setup
     setupEditor(editor) {
       this.editor = editor;
     }
 
-    //update attributes when content is updated
     onChangeContent(newContent) {
       this.props.setAttributes({ content: newContent });
     }
@@ -70,35 +48,30 @@ registerBlockType("amm-custom-block/shortcode-selector-inside", {
       this.props.setAttributes({ content: value });
     }
 
-    //tinymce interaction when button is clicked
     onClickShortcodeButton() {
       return () => {
-        //the content we want to insert
         var myContent = "[myshortcode][/myshortcode]";
 
         if (this.editor) {
-          //execCommand is a TinyMCE function
           this.editor.execCommand("mceInsertContent", false, myContent);
         }
       };
     }
 
     render() {
-      const backgroundColors = [
-        { value: "thebutton", label: "Выводит кнопку" },
-        { value: "thetitle", label: "Выводит заголовок" },
-        { value: "theprice", label: "Выводит стоимость" },
-      ];
+      backgroundColors;
 
       const { attributes, setAttributes, className } = this.props;
 
-      //return toolbar and richtext components
       return (
         <Fragment>
           <InspectorControls key="inspector">
-            <PanelBody title={__("Настройки заголовка")}>
+            <PanelBody title={__("Настройки шорткодов")}>
               <SelectControl
                 label={__("Доступные шорткоды")}
+                help={__(
+                  "Убедитесь, что код в квадратных скобках [...] если вводите вручную"
+                )}
                 options={backgroundColors}
                 value={attributes.selector}
                 onChange={this.shortcodeSelected}
@@ -116,7 +89,6 @@ registerBlockType("amm-custom-block/shortcode-selector-inside", {
             ]}
           />
           <RichText
-            //getSettings={ this.getEditorSettings } //a useful callback for adding params to TinyMCE on setup
             onSetup={this.setupEditor}
             key={"editable"}
             tagName={"p"}
@@ -130,20 +102,9 @@ registerBlockType("amm-custom-block/shortcode-selector-inside", {
     }
   },
 
-  //save our content to the DB
   save: function (props) {
-    //save the content variable
     var content = props.attributes.content;
 
-    return (
-      <RichText.Content
-        className={props.className}
-        value={"[" + content + "]"}
-      />
-    );
-    // el(RichText.Content, {
-    //   className: props.className,
-    //   value: content,
-    // });
+    return <RichText.Content className={props.className} value={content} />;
   },
 });
