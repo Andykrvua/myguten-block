@@ -1,5 +1,3 @@
-//import './editor.scss';
-//import './style.scss';
 import iconset from "./icons.js";
 
 const { __ } = wp.i18n;
@@ -9,7 +7,6 @@ const {
   IconButton,
   PanelBody,
   TextControl,
-  RadioControl,
   SelectControl,
   TextareaControl,
 } = wp.components;
@@ -24,6 +21,14 @@ registerBlockType("amm-custom-block/icons-block", {
     locations: {
       type: "array",
       default: [],
+    },
+    padding_top: {
+      type: "string",
+      default: "0px",
+    },
+    padding_bottom: {
+      type: "string",
+      default: "0px",
     },
   },
 
@@ -62,8 +67,28 @@ registerBlockType("amm-custom-block/icons-block", {
       props.setAttributes({ locations });
     };
 
+    const paddingTopChange = (padding_top) => {
+      props.setAttributes({ padding_top });
+    };
+
+    const paddingBottomChange = (padding_bottom) => {
+      props.setAttributes({ padding_bottom });
+    };
+
     let locationFields, locationDisplay;
     let iconsSelectOptions = [];
+
+    const paddingTopOptions = [
+      { value: "0px", label: __("0px") },
+      { value: "50px", label: __("50px") },
+      { value: "100px", label: __("100px") },
+    ];
+
+    const paddingBottomOptions = [
+      { value: "0px", label: __("0px") },
+      { value: "50px", label: __("50px") },
+      { value: "100px", label: __("100px") },
+    ];
 
     Object.keys(iconset).forEach(function (key) {
       iconsSelectOptions.push({ value: key, label: key });
@@ -116,6 +141,18 @@ registerBlockType("amm-custom-block/icons-block", {
     return [
       <InspectorControls key="1">
         <PanelBody title={__("Иконки")}>
+          <SelectControl
+            label={__("Отступ сверху")}
+            options={paddingTopOptions}
+            value={props.attributes.padding_top}
+            onChange={(padding_top) => paddingTopChange(padding_top)}
+          />
+          <SelectControl
+            label={__("Отступ снизу")}
+            options={paddingBottomOptions}
+            value={props.attributes.padding_bottom}
+            onChange={(padding_bottom) => paddingBottomChange(padding_bottom)}
+          />
           {locationFields}
           <Button isDefault onClick={handleAddLocation.bind(this)}>
             {__("Добавить иконку")}
@@ -142,7 +179,18 @@ registerBlockType("amm-custom-block/icons-block", {
     });
 
     return (
-      <div className={props.className + " post-desc__advant-wrap"}>
+      <div
+        className={props.className + " post-desc__advant-wrap"}
+        style={
+          props.attributes.padding_top === "0px" &&
+          props.attributes.padding_bottom === "0px"
+            ? ""
+            : {
+                paddingTop: props.attributes.padding_top,
+                paddingBottom: props.attributes.padding_bottom,
+              }
+        }
+      >
         {locationFields}
       </div>
     );

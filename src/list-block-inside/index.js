@@ -56,7 +56,6 @@ class HeadlineBlock extends Component {
 
       <div>
         <RichText
-          tagName="ul"
           multiline="li"
           placeholder={__("Список")}
           keepPlaceholderOnFocus
@@ -76,7 +75,9 @@ registerBlockType("amm-custom-block/list-block-inside", {
   parent: ["core/media-text"],
   attributes: {
     content: {
-      type: "string",
+      type: "array",
+      source: "children",
+      selector: "ul",
     },
     padding_top: {
       type: "string",

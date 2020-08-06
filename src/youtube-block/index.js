@@ -189,6 +189,8 @@ registerBlockType("amm-custom-block/youtube-block", {
     ];
   },
   save: (props) => {
+    let sliderRandom = Math.floor(Math.random() * 1000);
+
     const locationFields = props.attributes.locations.map((location, index) => {
       return (
         <li key={index} className="lazy-video splide__slide">
