@@ -33,8 +33,6 @@
 details {
   border-bottom: 1px solid #f1f5f8;
   cursor: pointer;
-  width: 80%;
-  margin: 0 auto;
 }
 details[open] .accordion__title::after {
   transform: rotate(270deg) translateY(-50%);

@@ -16,6 +16,8 @@ import "./accordion-block/index.js";
 
 import "./callback-block/index.js";
 
+import "./button-scroll-to-form/index.js";
+
 import "./youtube-block/index.js";
 import "./youtube-block-old/index.js";
 
