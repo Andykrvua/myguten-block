@@ -18,6 +18,8 @@ import "./callback-block/index.js";
 
 import "./button-scroll-to-form/index.js";
 
+import "./featured-post-block/index.js";
+
 import "./youtube-block/index.js";
 import "./youtube-block-old/index.js";
 

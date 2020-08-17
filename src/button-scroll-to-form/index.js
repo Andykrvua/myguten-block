@@ -32,13 +32,14 @@ registerBlockType("amm-custom-block/button-scroll-to-form", {
 
     return (
       <div className="custom_post_button post_inside_button">
-        <RichText
-          key={"editable"}
-          tagName={"button"}
-          className={"waves-effect waves-light main__button"}
-          onChange={onChangeContent}
-          value={attributes.content}
-        />
+        <button className="waves-effect waves-light main__button">
+          <RichText
+            key={"editable"}
+            tagName={"span"}
+            onChange={onChangeContent}
+            value={attributes.content}
+          />
+        </button>
       </div>
     );
   },
@@ -47,11 +48,9 @@ registerBlockType("amm-custom-block/button-scroll-to-form", {
     var content = props.attributes.content;
     return (
       <div className="custom_post_button post_inside_button">
-        <RichText.Content
-          className={"waves-effect waves-light main__button"}
-          tagName={"button"}
-          value={content}
-        />
+        <button className="waves-effect waves-light main__button">
+          <RichText.Content tagName={"span"} value={content} />
+        </button>
       </div>
     );
   },
