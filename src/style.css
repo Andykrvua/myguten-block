@@ -1,3 +1,76 @@
+/* how-we-work start */
+
+.how-we-work__wrap ol {
+  font-family: "Montserrat", sans-serif;
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: -25px;
+}
+
+.wp-block-amm-custom-block-how-we-work.how-we-work__wrap h2 {
+  color: #525252;
+  margin-bottom: 50px;
+  text-align: center;
+  padding-top: 0;
+}
+
+.how-we-work__item {
+  flex: 1 1 250px;
+  margin: 25px;
+  flex-direction: column;
+  position: relative;
+}
+
+.how-we-work__number {
+  font-weight: 900;
+  font-size: 100px;
+  line-height: 100px;
+  color: #363636;
+  position: absolute;
+  opacity: 0.1;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.how-we-work__title {
+  font-weight: 900;
+  font-size: 18px;
+  line-height: 27px;
+  text-transform: uppercase;
+  color: #872d2d;
+  display: flex;
+  padding-bottom: 5px;
+}
+
+.how-we-work__desc {
+  display: flex;
+  font-size: 14px;
+  color: #525252;
+}
+
+@media only screen and (max-width: 700px) {
+  .how-we-work__number {
+    font-size: 80px;
+    line-height: 80px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .how-we-work__wrap ol {
+    margin: -25px 0;
+  }
+
+  .how-we-work__item {
+    margin: 25px 0;
+  }
+}
+
+/* how-we-work end */
+
 /* paragraph-block start */
 
 .post-desc__p-text {
@@ -270,7 +343,7 @@ h2.post-desc__subtitle {
 }
 
 .post_inside_button button:before {
-  content: '';
+  content: "";
   left: 0;
   top: -100%;
   position: absolute;
@@ -287,22 +360,20 @@ h2.post-desc__subtitle {
 }
 
 .post_inside_button button span {
-display: inline-block;
-    width: 100%;
-    height: 100%;
-    -webkit-transition: all 0.3s;
-    -webkit-backface-visibility: hidden;
-    -moz-transition: all 0.3s;
-    transition: all 0.3s;
-    backface-visibility: hidden;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  -webkit-transition: all 0.3s;
+  -webkit-backface-visibility: hidden;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+  backface-visibility: hidden;
 }
-
 
 .post_inside_button button:hover span {
   -webkit-transform: translateY(300%);
   transform: translateY(300%);
 }
-
 
 .post_inside_button button:hover:before {
   top: 50%;
