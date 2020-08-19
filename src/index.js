@@ -18,8 +18,6 @@ import "./callback-block/index.js";
 
 import "./button-scroll-to-form/index.js";
 
-import "./featured-post-block/index.js";
-
 import "./how-we-work/index.js";
 
 import "./review-block/index.js";

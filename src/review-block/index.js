@@ -32,6 +32,8 @@ registerBlockType("amm-custom-block/review-block", {
         videoID: "videoID",
         imgQual: "maxresdefault",
         address: "Текст отзыва",
+        title: "",
+        text: "",
         mediaID: "",
         mediaAlt: "",
         mediaURL: "",
@@ -54,6 +56,18 @@ registerBlockType("amm-custom-block/review-block", {
     const handleLocationChange = (address, index) => {
       const locations = [...props.attributes.locations];
       locations[index].address = address;
+      props.setAttributes({ locations });
+    };
+
+    const handleTitleChange = (title, index) => {
+      const locations = [...props.attributes.locations];
+      locations[index].title = title;
+      props.setAttributes({ locations });
+    };
+
+    const handleTitleTextChange = (text, index) => {
+      const locations = [...props.attributes.locations];
+      locations[index].text = text;
       props.setAttributes({ locations });
     };
 
@@ -84,6 +98,16 @@ registerBlockType("amm-custom-block/review-block", {
               placeholder="Отзыв"
               value={props.attributes.locations[index].address}
               onChange={(address) => handleLocationChange(address, index)}
+            />
+            <TextControl
+              placeholder="Источник отзыва (ссылка)"
+              value={props.attributes.locations[index].title}
+              onChange={(title) => handleTitleChange(title, index)}
+            />
+            <TextControl
+              placeholder="Текст ссылки"
+              value={props.attributes.locations[index].text}
+              onChange={(text) => handleTitleTextChange(text, index)}
             />
             <SelectControl
               label="Качество изображения"
@@ -127,14 +151,21 @@ registerBlockType("amm-custom-block/review-block", {
       locationDisplay = props.attributes.locations.map((location, index) => {
         return (
           <li key={index} className="splide__slide">
-            <div className="">
-              <a className="" href={location.youtubeurl}></a>
-              <span>{location.address}</span>
+            <div className="review-item">
+              {/* <a className="" href={location.youtubeurl}></a> */}
               {location.mediaURL ? (
                 <img src={location.mediaURL} alt={location.mediaAlt} />
               ) : (
-                ""
+                <img src="/wp-content/plugins/amm-custom-block/assets/man_review.png" />
               )}
+              <div className="review-item-text">
+                <span>{location.address}</span>
+                {location.title ? (
+                  <a href={location.title}>{location.text}</a>
+                ) : (
+                  ""
+                )}
+              </div>
             </div>
           </li>
         );
@@ -162,21 +193,31 @@ registerBlockType("amm-custom-block/review-block", {
     ];
   },
   save: (props) => {
-    console.log("props", props);
     const locationFields = props.attributes.locations.map((location, index) => {
       return (
         <li key={index} className="splide__slide">
-          <div className="">
-            <a className="" href={location.youtubeurl}></a>
-            <span>{location.address}</span>
-            <img src={location.mediaURL} alt={location.mediaAlt} />
+          <div className="review-item">
+            {/* <a className="" href={location.youtubeurl}></a> */}
+            {location.mediaURL ? (
+              <img src={location.mediaURL} alt={location.mediaAlt} />
+            ) : (
+              <img src="/wp-content/plugins/amm-custom-block/assets/man_review.png" />
+            )}
+            <div className="review-item-text">
+              <span>{location.address}</span>
+              {location.title ? (
+                <a href={location.title}>{location.text}</a>
+              ) : (
+                ""
+              )}
+            </div>
           </div>
         </li>
       );
     });
 
     return (
-      <div className={props.className + " splide" + " primary--slider"}>
+      <div className={props.className + " splide" + " review--slider"}>
         <div className="splide__track">
           <ul className="splide__list">{locationFields}</ul>
         </div>

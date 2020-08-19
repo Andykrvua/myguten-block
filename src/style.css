@@ -1,3 +1,65 @@
+/* review block start */
+
+.review-item {
+  display: flex;
+  margin: 0 72px;
+  align-items: center;
+  height: 100%;
+}
+
+.review-item img {
+  border-radius: 50%;
+}
+
+.review-item-text {
+  padding-left: 15px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  color: #525252;
+}
+
+.review-item-text a {
+  display: block;
+  color: #872d2d;
+  padding-top: 5px;
+}
+
+.review--slider .splide__pagination__page.is-active {
+  background: #f39c12;
+}
+
+.review--slider .splide__pagination {
+  bottom: -14px;
+}
+
+@media only screen and (max-width: 800px) {
+  .review-item img {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .review-item {
+    margin: 0;
+  }
+  .review--slider .splide__arrows {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .review-item {
+    flex-direction: column;
+  }
+  .review-item-text {
+    padding-left: 0;
+    padding-top: 15px;
+  }
+}
+
+/* review block end */
+
 /* how-we-work start */
 
 .how-we-work__wrap ol {

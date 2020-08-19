@@ -3,8 +3,8 @@ const { registerBlockType } = wp.blocks;
 import saveBlock from "./save";
 import editBlock from "./edit";
 
-registerBlockType("amm-custom-block/featured-post-block", {
-  title: __("Featured post"),
+registerBlockType("amm-custom-block/featured-post-block-old", {
+  title: __("Featured post old"),
   icon: "shield",
   category: "AMM",
   attributes: {
