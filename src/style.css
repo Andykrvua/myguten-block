@@ -1,5 +1,9 @@
 /* review block start */
 
+.review--slider {
+  margin-bottom: 25px;
+}
+
 .review-item {
   display: flex;
   margin: 0 72px;
@@ -347,6 +351,10 @@ h2.post-desc__subtitle {
   border-radius: 3px;
 }
 
+.splide--nav > .splide__track > .splide__list > .splide__slide {
+  border: 5px solid transparent;
+}
+
 .splide__arrow {
   background: #e0e0e0;
   width: 3em;
@@ -355,6 +363,32 @@ h2.post-desc__subtitle {
 
 .splide__arrow:focus {
   background-color: #f39c12;
+}
+
+.secondary--slider .splide__track {
+  margin: 0 75px;
+}
+
+.secondary--slider .splide__pagination__page.is-active {
+  background: #f39c12;
+}
+
+.secondary--slider .splide__pagination {
+  bottom: -22px;
+}
+
+.secondary--slider li:not(.is-active) .lazy-video__wrapper {
+  border-radius: 4px;
+}
+
+.secondary--slider li:not(.is-active) .lazy-video__wrapper img {
+  border-radius: 4px;
+}
+
+@media only screen and (max-width: 600px) {
+  .splide--nav > .splide__track > .splide__list > .splide__slide {
+    border: 3px solid transparent;
+  }
 }
 
 /* youtube-block end */
@@ -393,7 +427,7 @@ h2.post-desc__subtitle {
 
 .wp-block-amm-custom-block-button-scroll-to-form.custom_post_button {
   text-align: center;
-  padding: 50px 0;
+  padding: 50px 0 !important;
 }
 
 .post_inside_button button {
