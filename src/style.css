@@ -1,7 +1,15 @@
 /* review block start */
-
 .review--slider {
   margin-bottom: 25px;
+  width: 80%;
+  margin: 0 auto;
+  margin-bottom: 30px;
+}
+
+@media only screen and (max-width: 768px) {
+  .review--slider {
+    width: 100%;
+  }
 }
 
 .review-item {
@@ -9,10 +17,11 @@
   margin: 0 72px;
   align-items: center;
   height: 100%;
+  padding: 0 50px;
 }
 
 .review-item img {
-  border-radius: 50%;
+  max-width: 100px;
 }
 
 .review-item-text {
@@ -22,10 +31,26 @@
   color: #525252;
 }
 
-.review-item-text a {
+.review-name {
+  display: block;
+  padding-bottom: 5px;
+  font-weight: 600;
+}
+
+.review-item-text {
+  width: 100%;
+}
+
+.review-date__link {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 5px;
+}
+
+.review-date__link a {
   display: block;
   color: #872d2d;
-  padding-top: 5px;
+  text-decoration: underline;
 }
 
 .review--slider .splide__pagination__page.is-active {
@@ -33,22 +58,61 @@
 }
 
 .review--slider .splide__pagination {
-  bottom: -14px;
+  bottom: -24px;
 }
 
-@media only screen and (max-width: 800px) {
-  .review-item img {
-    width: 100px;
-    height: 100px;
+.splide__hand {
+  display: block;
+  text-align: center;
+}
+
+.splide__hand img {
+  width: 50px;
+}
+
+.review--slider .splide__arrow {
+  background-color: transparent;
+}
+
+.review--slider .splide__arrow svg {
+  width: 0.8em;
+  height: 0.8em;
+  fill: #872d2d;
+}
+
+.review--slider .splide__arrow--prev {
+  left: calc(50% - 40px);
+  transform: translateX(-50%);
+}
+
+.review--slider .splide__arrow--next {
+  right: calc(50% - 85px);
+  transform: translateX(-50%);
+}
+
+.review--slider .splide__arrow {
+  opacity: 1;
+  top: auto;
+  bottom: 0;
+}
+
+.review--slider .splide__track {
+  margin-bottom: 20px;
+}
+
+.review--slider .splide__arrow:focus {
+  background: none;
+}
+
+@media only screen and (max-width: 1000px) {
+  .review-item {
+    padding: 0;
   }
 }
 
 @media only screen and (max-width: 700px) {
   .review-item {
     margin: 0;
-  }
-  .review--slider .splide__arrows {
-    display: none;
   }
 }
 
@@ -59,6 +123,15 @@
   .review-item-text {
     padding-left: 0;
     padding-top: 15px;
+    text-align: center;
+  }
+  .review-date__link {
+    display: flex;
+    justify-content: center;
+    padding-top: 5px;
+  }
+  .review-date__link a {
+    margin-right: 25px;
   }
 }
 
@@ -278,6 +351,25 @@ h2.post-desc__subtitle {
 /* heading block end */
 
 /* youtube-block start */
+.primary--slider {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.secondary--slider {
+  width: 80%;
+  margin: 0 auto;
+}
+
+@media only screen and (max-width: 768px) {
+  .primary--slider {
+    width: 100%;
+  }
+
+  .secondary--slider {
+    width: 100%;
+  }
+}
 
 .lazy-video__wrapper {
   position: relative;
@@ -438,23 +530,6 @@ h2.post-desc__subtitle {
   color: #fff;
 }
 
-.post_inside_button button:before {
-  content: "";
-  left: 0;
-  top: -100%;
-  position: absolute;
-  height: 60%;
-  width: 100%;
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-image: url('data:image/svg+xml,\
-<svg class="file-invoice-dollar" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">\
-<path fill="%23fff" d="M377 105L279.1 7c-4.5-4.5-10.6-7-17-7H256v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zm-153 31V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zM64 72c0-4.42 3.58-8 8-8h80c4.42 0 8 3.58 8 8v16c0 4.42-3.58 8-8 8H72c-4.42 0-8-3.58-8-8V72zm0 80v-16c0-4.42 3.58-8 8-8h80c4.42 0 8 3.58 8 8v16c0 4.42-3.58 8-8 8H72c-4.42 0-8-3.58-8-8zm144 263.88V440c0 4.42-3.58 8-8 8h-16c-4.42 0-8-3.58-8-8v-24.29c-11.29-.58-22.27-4.52-31.37-11.35-3.9-2.93-4.1-8.77-.57-12.14l11.75-11.21c2.77-2.64 6.89-2.76 10.13-.73 3.87 2.42 8.26 3.72 12.82 3.72h28.11c6.5 0 11.8-5.92 11.8-13.19 0-5.95-3.61-11.19-8.77-12.73l-45-13.5c-18.59-5.58-31.58-23.42-31.58-43.39 0-24.52 19.05-44.44 42.67-45.07V232c0-4.42 3.58-8 8-8h16c4.42 0 8 3.58 8 8v24.29c11.29.58 22.27 4.51 31.37 11.35 3.9 2.93 4.1 8.77.57 12.14l-11.75 11.21c-2.77 2.64-6.89 2.76-10.13.73-3.87-2.43-8.26-3.72-12.82-3.72h-28.11c-6.5 0-11.8 5.92-11.8 13.19 0 5.95 3.61 11.19 8.77 12.73l45 13.5c18.59 5.58 31.58 23.42 31.58 43.39 0 24.53-19.05 44.44-42.67 45.07z"/>\
-</svg>');
-}
-
 .post_inside_button button span {
   display: inline-block;
   width: 100%;
@@ -465,15 +540,4 @@ h2.post-desc__subtitle {
   transition: all 0.3s;
   backface-visibility: hidden;
 }
-
-.post_inside_button button:hover span {
-  -webkit-transform: translateY(300%);
-  transform: translateY(300%);
-}
-
-.post_inside_button button:hover:before {
-  top: 50%;
-  transform: translateY(-50%);
-}
-
 /* button scroll to form end */

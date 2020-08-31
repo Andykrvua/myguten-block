@@ -9,6 +9,8 @@ const {
   SelectControl,
   TextareaControl,
   PanelRow,
+  DatePicker,
+  CheckboxControl,
 } = wp.components;
 const { InspectorControls, MediaUpload } = wp.editor;
 const { Fragment } = wp.element;
@@ -30,13 +32,15 @@ registerBlockType("amm-custom-block/review-block", {
       locations.push({
         youtubeurl: "url",
         videoID: "videoID",
-        imgQual: "maxresdefault",
         address: "Текст отзыва",
         title: "",
         text: "",
         mediaID: "",
         mediaAlt: "",
         mediaURL: "",
+        name: "",
+        date: "",
+        isChecked: false,
       });
       props.setAttributes({ locations });
     };
@@ -47,15 +51,16 @@ registerBlockType("amm-custom-block/review-block", {
       props.setAttributes({ locations });
     };
 
-    const handleimgQualOptionsChange = (imgQual, index) => {
-      const locations = [...props.attributes.locations];
-      locations[index].imgQual = imgQual;
-      props.setAttributes({ locations });
-    };
-
     const handleLocationChange = (address, index) => {
       const locations = [...props.attributes.locations];
       locations[index].address = address;
+      props.setAttributes({ locations });
+    };
+
+    const handleDateChange = (date, index) => {
+      const locations = [...props.attributes.locations];
+      // locations[index].date = date;
+      locations[index].date = moment(date).format("YYYY-MM-DD");
       props.setAttributes({ locations });
     };
 
@@ -65,40 +70,65 @@ registerBlockType("amm-custom-block/review-block", {
       props.setAttributes({ locations });
     };
 
+    const handleNameChange = (name, index) => {
+      const locations = [...props.attributes.locations];
+      locations[index].name = name;
+      props.setAttributes({ locations });
+    };
+
     const handleTitleTextChange = (text, index) => {
       const locations = [...props.attributes.locations];
       locations[index].text = text;
       props.setAttributes({ locations });
     };
 
+    const handleCheckedChange = (val, index) => {
+      const locations = [...props.attributes.locations];
+      locations[index].isChecked = val;
+      props.setAttributes({ locations });
+    };
+
     const onSelectImage = (media, index) => {
       console.log(media);
       const locations = [...props.attributes.locations];
-      locations[index].mediaURL = media.sizes.thumbnail.url;
+      // locations[index].mediaURL = media.sizes.thumbnail.url;
+      locations[index].mediaURL = media.url;
       locations[index].mediaID = media.id;
       locations[index].mediaAlt = media.alt;
       props.setAttributes({ locations });
     };
 
-    let locationFields, locationDisplay;
+    let newDate = moment(new Date()).format("YYYY-MM-DD");
 
-    const imgQualOptions = [
-      { value: "default", label: __("default 120*90") },
-      { value: "maxresdefault", label: __("max 1280*720") },
-      { value: "hqdefault", label: __("hq 480*360") },
-      { value: "mqdefault", label: __("mq 320*180") },
-      { value: "sddefault", label: __("sd 640*480") },
-    ];
+    let locationFields, locationDisplay;
 
     if (props.attributes.locations.length) {
       locationFields = props.attributes.locations.map((location, index) => {
         return (
           <Fragment key={index}>
+            <TextControl
+              placeholder="Имя"
+              value={props.attributes.locations[index].name}
+              onChange={(name) => handleNameChange(name, index)}
+            />
             <TextareaControl
               placeholder="Отзыв"
               value={props.attributes.locations[index].address}
               onChange={(address) => handleLocationChange(address, index)}
             />
+            <CheckboxControl
+              label="Показать дату?"
+              checked={props.attributes.locations[index].isChecked}
+              onChange={(val) => handleCheckedChange(val, index)}
+            />
+            {props.attributes.locations[index].isChecked ? (
+              <DatePicker
+                currentDate={newDate}
+                onChange={(date) => handleDateChange(date, index)}
+              />
+            ) : (
+              ""
+            )}
             <TextControl
               placeholder="Источник отзыва (ссылка)"
               value={props.attributes.locations[index].title}
@@ -108,12 +138,6 @@ registerBlockType("amm-custom-block/review-block", {
               placeholder="Текст ссылки"
               value={props.attributes.locations[index].text}
               onChange={(text) => handleTitleTextChange(text, index)}
-            />
-            <SelectControl
-              label="Качество изображения"
-              value={props.attributes.locations[index].imgQual}
-              options={imgQualOptions}
-              onChange={(imgQual) => handleimgQualOptionsChange(imgQual, index)}
             />
             <MediaUpload
               onSelect={(media) => onSelectImage(media, index)}
@@ -152,19 +176,26 @@ registerBlockType("amm-custom-block/review-block", {
         return (
           <li key={index} className="splide__slide">
             <div className="review-item">
-              {/* <a className="" href={location.youtubeurl}></a> */}
               {location.mediaURL ? (
                 <img src={location.mediaURL} alt={location.mediaAlt} />
               ) : (
                 <img src="/wp-content/plugins/amm-custom-block/assets/man_review.png" />
               )}
               <div className="review-item-text">
-                <span>{location.address}</span>
-                {location.title ? (
-                  <a href={location.title}>{location.text}</a>
+                {location.name ? (
+                  <span className="review-name">{location.name}</span>
                 ) : (
-                  ""
+                  <span className="review-name">Самый счастливый клиент</span>
                 )}
+                <span>{location.address}</span>
+                <div className="review-date__link">
+                  {location.title ? (
+                    <a href={location.title}>{location.text}</a>
+                  ) : (
+                    ""
+                  )}
+                  {location.isChecked ? <span>{location.date}</span> : ""}
+                </div>
               </div>
             </div>
           </li>
@@ -189,6 +220,9 @@ registerBlockType("amm-custom-block/review-block", {
             {locationDisplay ? locationDisplay : "Карусель отзывов"}
           </ul>
         </div>
+        <div className="splide__hand">
+          <img src="/wp-content/plugins/amm-custom-block/assets/hand.svg" />
+        </div>
       </div>,
     ];
   },
@@ -197,19 +231,26 @@ registerBlockType("amm-custom-block/review-block", {
       return (
         <li key={index} className="splide__slide">
           <div className="review-item">
-            {/* <a className="" href={location.youtubeurl}></a> */}
             {location.mediaURL ? (
               <img src={location.mediaURL} alt={location.mediaAlt} />
             ) : (
               <img src="/wp-content/plugins/amm-custom-block/assets/man_review.png" />
             )}
             <div className="review-item-text">
-              <span>{location.address}</span>
-              {location.title ? (
-                <a href={location.title}>{location.text}</a>
+              {location.name ? (
+                <span className="review-name">{location.name}</span>
               ) : (
-                ""
+                <span className="review-name">Самый счастливый клиент</span>
               )}
+              <span>{location.address}</span>
+              <div className="review-date__link">
+                {location.title ? (
+                  <a href={location.title}>{location.text}</a>
+                ) : (
+                  ""
+                )}
+                {location.isChecked ? <span>{location.date}</span> : ""}
+              </div>
             </div>
           </div>
         </li>
@@ -220,6 +261,9 @@ registerBlockType("amm-custom-block/review-block", {
       <div className={props.className + " splide" + " review--slider"}>
         <div className="splide__track">
           <ul className="splide__list">{locationFields}</ul>
+        </div>
+        <div className="splide__hand">
+          <img src="/wp-content/plugins/amm-custom-block/assets/hand.svg" />
         </div>
       </div>
     );
