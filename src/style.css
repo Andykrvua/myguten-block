@@ -1,3 +1,55 @@
+/* how we work block start */
+
+.how-we-work-item {
+  border-top: 3px solid #d8d8d8;
+  position: relative;
+  cursor: grab;
+  margin-top: 15px;
+  padding: 15px 25px 0 0;
+}
+
+.how-we-work-item p {
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  margin: 15px 0 10px;
+  color: #525252;
+}
+
+.how-we-work-item__number {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 100;
+  font-size: 12px;
+  line-height: 20px;
+  color: #fff;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #f39c12;
+  position: absolute;
+  opacity: 1;
+  left: 0;
+  top: -12px;
+  text-align: center;
+}
+
+.how-we-work-item__title {
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  line-height: 24px;
+  color: #525252;
+  font-weight: 400;
+}
+
+/* how-we-work old start */
+@media only screen and (max-width: 700px) {
+  .how-we-work__number {
+    font-size: 80px;
+    line-height: 80px;
+  }
+}
+
+/* how we work block end */
+
 /* review block start */
 .review--slider {
   margin-bottom: 25px;
@@ -18,6 +70,7 @@
   align-items: center;
   height: 100%;
   padding: 0 50px;
+  cursor: grab;
 }
 
 .review-item img {
@@ -35,6 +88,7 @@
   display: block;
   padding-bottom: 5px;
   font-weight: 600;
+  font-size: 16px;
 }
 
 .review-item-text {
@@ -137,79 +191,6 @@
 
 /* review block end */
 
-/* how-we-work start */
-
-.how-we-work__wrap ol {
-  font-family: "Montserrat", sans-serif;
-  list-style-type: none;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin: -25px;
-}
-
-.wp-block-amm-custom-block-how-we-work.how-we-work__wrap h2 {
-  color: #525252;
-  margin-bottom: 50px;
-  text-align: center;
-  padding-top: 0;
-}
-
-.how-we-work__item {
-  flex: 1 1 250px;
-  margin: 25px;
-  flex-direction: column;
-  position: relative;
-}
-
-.how-we-work__number {
-  font-weight: 900;
-  font-size: 100px;
-  line-height: 100px;
-  color: #363636;
-  position: absolute;
-  opacity: 0.1;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.how-we-work__title {
-  font-weight: 900;
-  font-size: 18px;
-  line-height: 27px;
-  text-transform: uppercase;
-  color: #872d2d;
-  display: flex;
-  padding-bottom: 5px;
-}
-
-.how-we-work__desc {
-  display: flex;
-  font-size: 14px;
-  color: #525252;
-}
-
-@media only screen and (max-width: 700px) {
-  .how-we-work__number {
-    font-size: 80px;
-    line-height: 80px;
-  }
-}
-
-@media only screen and (max-width: 600px) {
-  .how-we-work__wrap ol {
-    margin: -25px 0;
-  }
-
-  .how-we-work__item {
-    margin: 25px 0;
-  }
-}
-
-/* how-we-work end */
-
 /* paragraph-block start */
 
 .post-desc__p-text {
@@ -271,8 +252,8 @@ details:last-child {
 
 summary.accordion__title {
   position: relative;
-  font-size: 22px;
-  line-height: 28px;
+  font-size: 16px;
+  line-height: 24px;
   font-family: "Montserrat", sans-serif;
   color: #525252;
   font-weight: 600;
