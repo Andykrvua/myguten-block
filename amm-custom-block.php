@@ -8,6 +8,12 @@
 * Domain Path: /languages/
 */
 
+if( ! defined( 'ABSPATH') ) {
+    exit;
+}
+
+include_once('src/metabox-ldjson/metabox.php');
+
 function amm_custom_block_register_block() {
 
 	// Register JavasScript File build/index.js

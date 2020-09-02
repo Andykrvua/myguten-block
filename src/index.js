@@ -23,6 +23,9 @@ import "./how-we-work/index.js";
 import "./review-block/index.js";
 
 import "./youtube-block/index.js";
+
+import "./test-block/index.js";
+
 import "./youtube-block-old/index.js";
 
 import "./bg-image/index.js";
