@@ -20,7 +20,8 @@ function myprefix_add_meta_box() {
         'myprefix_post_options_metabox_html', 
         'post', 
         'normal', 
-        'default'
+        'default',
+        array('__back_compat_meta_box' => true)
     );
 }
 
